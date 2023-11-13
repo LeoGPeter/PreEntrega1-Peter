@@ -61,7 +61,7 @@ export const products = [
         brand: "BGH",
         price: 640000,
         category: "Electrodomestico",
-        imgUrl: "https://images.fravega.com/f1000/193df4e3ab1ff7b72cded5b5c29840bb.png.webpp"
+        imgUrl: "https://images.fravega.com/f1000/193df4e3ab1ff7b72cded5b5c29840bb.png.webp"
     },
     {
         id: 9,
