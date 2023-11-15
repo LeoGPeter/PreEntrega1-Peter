@@ -1,3 +1,5 @@
+import AutorenewIcon from '@mui/icons-material/Autorenew';
+
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
@@ -17,6 +19,7 @@ export const ItemListContainer = props => {
             setTimeout(() => {
                 resolve(products);
             }, 2000);
+            
         });
 
         promise.then((response) =>{
@@ -30,6 +33,8 @@ export const ItemListContainer = props => {
         })
         .finally(() => setLoading(false));
     },[id])
+
+    
 
     return(
         <Container className='mt-4'><h2>Productos</h2>

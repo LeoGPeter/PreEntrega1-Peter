@@ -9,11 +9,10 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 
 export const Item = ({item}) => {
   return (
-    <Card sx={{ maxWidth: 370 }}>
+    <Card sx={{ maxWidth: 370, margin: 2 }}>
     <CardActionArea>
       <CardMedia
         component="img"
-        maxheight=""
         image={item.imgUrl}
         
       />

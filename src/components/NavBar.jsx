@@ -22,9 +22,6 @@ export const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <NavLink to="/">
-              <Nav.Link>Home</Nav.Link>
-            </NavLink>
             <NavDropdown title="Categorias" id="basic-nav-dropdown">
               {[...uniqueCategories].map((item) => (
               <NavDropdown.Item as={NavLink} key={item} to={`/category/${item}`}>
@@ -37,4 +34,4 @@ export const NavBar = () => {
       </Container>
     </Navbar>
   )
-}
+};
