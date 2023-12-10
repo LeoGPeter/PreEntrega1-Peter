@@ -1,14 +1,11 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-
 import { NavBar } from "./components/NavBar";
 import { ItemListContainer } from "./components/ItemListContainer";
 import { ItemDetailsContainer } from "./components/ItemDetailsContainer";
 import { CartWidget } from "./components/CartWidget";
 
- 
 import "./App.css"
-
 
 function App() {
   return (
@@ -21,10 +18,7 @@ function App() {
         <Route path="*" element= {<>404</>} />
       </Routes>
     </BrowserRouter>
-  
   )
-    
-  
 }
 
 export default App

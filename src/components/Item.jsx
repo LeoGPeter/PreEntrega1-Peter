@@ -14,7 +14,6 @@ export const Item = ({item}) => {
       <CardMedia
         component="img"
         image={item.imgUrl}
-        
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -31,7 +30,6 @@ export const Item = ({item}) => {
        Comprar
       </Button>
         </Link>
-      
     </CardActions>
   </Card>
   );

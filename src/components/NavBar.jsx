@@ -7,10 +7,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { CartWidget } from './CartWidget';
 
-import { products } from '../../data/products';
-
-const categories = products.map((item) => item.category);
-const uniqueCategories = new Set(categories);
+//const categories = products.map((item) => item.category);
+//const uniqueCategories = new Set(categories);
 
 export const NavBar = () => {
   return (
@@ -23,10 +21,18 @@ export const NavBar = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavDropdown title="Categorias" id="basic-nav-dropdown">
-              {[...uniqueCategories].map((item) => (
-              <NavDropdown.Item as={NavLink} key={item} to={`/category/${item}`}>
-                {item}
-                </NavDropdown.Item>))}
+              <NavDropdown.Item as={NavLink} to={`/category/Tv y Audio`}>
+              Tv y Audio
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to={`/category/Electrodomestico`}>
+                Electrodomestico
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to={`/category/Tecnologia`}>
+                Tecnologia
+                </NavDropdown.Item>
+                <NavDropdown.Item as={NavLink} to={`/category/Hogar`}>
+                Hogar
+                </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

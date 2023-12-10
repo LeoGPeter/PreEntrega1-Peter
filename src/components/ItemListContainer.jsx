@@ -3,9 +3,9 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
+import { getFirestore, getDocs, doc, collection, query, where } from "firebase/firestore";
 
 import { ItemList } from './ItemList';
-import { products } from '../../data/products';
 
 export const ItemListContainer = props => {
 
@@ -15,26 +15,23 @@ export const ItemListContainer = props => {
     const {id} = useParams();
 
     useEffect(() => {
-        const promise = new Promise((resolve, reject)=>{
-            setTimeout(() => {
-                resolve(products);
-            }, 2000);
-            
-        });
+        const db = getFirestore();
 
-        promise.then((response) =>{
-            if(id){
-                const filters = response.filter((item) => item.category === id);
-                setItems(filters)
-            }else{
-                setItems(response)
+        const refCollection = id
+            ? query(collection(db, "products"), where("categoryId", "==", id))
+            : collection(db, "products");
+        
+        getDocs(refCollection).then((snapshot) => {
+            if (snapshot.size === 0)console.log("no results");
+            else{
+                setItems(
+                    snapshot.docs.map((doc) => {
+                        return {id: doc.id, ...doc.data()};
+                    })
+                );
             }
-            
-        })
-        .finally(() => setLoading(false));
-    },[id])
-
-    
+        });
+    },[id]);
 
     return(
         <Container className='mt-4'><h2>Productos</h2>

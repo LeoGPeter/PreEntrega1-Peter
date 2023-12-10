@@ -9,11 +9,8 @@ import { CardActionArea } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 
-import { products } from '../../data/products';
-
 export const ItemDetailsContainer = () => {
     const [item, setItem] = useState(null)
-
     const {id} = useParams();
 
     useEffect(() => {
@@ -25,8 +22,7 @@ export const ItemDetailsContainer = () => {
 
         promise.then((response) =>{
                 const filters = response.find((item) => item.id == id);
-                setItem(filters) ;
-        })
+                setItem(filters);})
     },[id]);
 
     if (!item) {
