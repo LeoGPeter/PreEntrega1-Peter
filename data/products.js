@@ -1,4 +1,4 @@
-export const products = [ 
+/*export const products = [ 
     {
         id: 1,
         title: "Smart TV 4K UHD Samsung 50",
@@ -131,4 +131,4 @@ export const products = [
 
 
 ]
-    
+    */

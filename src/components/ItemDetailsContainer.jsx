@@ -4,25 +4,30 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { Button, CardActionArea } from '@mui/material';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
+import { getFirestore, getDoc, doc } from "firebase/firestore";
+import Container from 'react-bootstrap/Container';
+
+import { CartContext } from '../contexts/CartCotext';
 
 export const ItemDetailsContainer = () => {
     const [item, setItem] = useState(null)
+
     const {id} = useParams();
 
-    useEffect(() => {
-        const promise = new Promise((resolve, reject)=>{
-            setTimeout(() => {
-                resolve(products);
-            }, 2000);
-        });
+    const { addItem } = useContext (CartContext);
 
-        promise.then((response) =>{
-                const filters = response.find((item) => item.id == id);
-                setItem(filters);})
+    useEffect(() => {
+        const db = getFirestore();
+
+        const refDoc = doc(db, "products", id );
+
+        getDoc(refDoc).then((snapshot) => {
+          setItem({id: snapshot.id, ...snapshot.data()});
+        });
     },[id]);
 
     if (!item) {
@@ -30,7 +35,8 @@ export const ItemDetailsContainer = () => {
     }
 
     return (
-        <Card sx={{ maxWidth: 500, margin: 3 }}>
+      <Container>
+      <Card sx={{ maxWidth: 500, margin: 3 }}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -43,8 +49,18 @@ export const ItemDetailsContainer = () => {
               <Typography variant="body2" color="text.secondary">
                 {item.title}
               </Typography>
+              <Typography variant="body2" color="text.secondary">
+                ${item.price}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">Stock:  
+                 {item.stock}
+              </Typography>
             </CardContent>
+            <Button onClick={() => addItem(item)} size="small" color="primary">
+              Agregar al carrito
+              </Button>
           </CardActionArea>
-        </Card>
+        </Card> 
+        </Container>
       );
 }

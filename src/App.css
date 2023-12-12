@@ -4,3 +4,23 @@
     justify-content: space-between;
     
 }
+
+.producto-seleccionado {
+    display: flex;
+    padding: 50px;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+
+
+.item-count {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    border-radius: 2rem ;
+}

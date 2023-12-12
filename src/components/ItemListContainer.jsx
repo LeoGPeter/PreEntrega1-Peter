@@ -1,11 +1,12 @@
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 
-import { useEffect, useState } from 'react';
+import { useContext ,useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
+import { getFirestore, getDocs, collection, query, where } from "firebase/firestore";
 import Container from 'react-bootstrap/Container';
-import { getFirestore, getDocs, doc, collection, query, where } from "firebase/firestore";
 
 import { ItemList } from './ItemList';
+import { CartContext } from '../contexts/CartCotext';
 
 export const ItemListContainer = props => {
 
@@ -13,6 +14,8 @@ export const ItemListContainer = props => {
     const [loading, setLoading] = useState(true);
 
     const {id} = useParams();
+
+    const context = useContext(CartContext);
 
     useEffect(() => {
         const db = getFirestore();
