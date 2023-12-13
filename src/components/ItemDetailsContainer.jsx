@@ -12,6 +12,7 @@ import { getFirestore, getDoc, doc } from "firebase/firestore";
 import Container from 'react-bootstrap/Container';
 
 import { CartContext } from '../contexts/CartCotext';
+import { ItemCount } from './ItemCount';
 
 export const ItemDetailsContainer = () => {
     const [item, setItem] = useState(null)
@@ -29,6 +30,11 @@ export const ItemDetailsContainer = () => {
           setItem({id: snapshot.id, ...snapshot.data()});
         });
     },[id]);
+
+    const add = (quantity) =>{
+      addItem(item, quantity)
+    }
+    
 
     if (!item) {
         return <AutorenewIcon/>;
@@ -52,13 +58,11 @@ export const ItemDetailsContainer = () => {
               <Typography variant="body2" color="text.secondary">
                 ${item.price}
               </Typography>
-              <Typography variant="body2" color="text.secondary">Stock:  
+              <Typography variant="body2" color="text.secondary">Stock:   
                  {item.stock}
               </Typography>
+              <ItemCount item={item} addItem={add} />
             </CardContent>
-            <Button onClick={() => addItem(item)} size="small" color="primary">
-              Agregar al carrito
-              </Button>
           </CardActionArea>
         </Card> 
         </Container>
