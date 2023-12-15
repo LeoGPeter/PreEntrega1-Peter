@@ -7,30 +7,30 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
-export const Item = ({item}) => {
+export const Item = ({ item }) => {
   return (
     <Card sx={{ maxWidth: 370, margin: 2 }}>
-    <CardActionArea>
-      <CardMedia
-        component="img"
-        image={item.imgUrl}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {item.brad}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {item.title}
-        </Typography>
-      </CardContent>
-    </CardActionArea>
-    <CardActions>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          image={item.imgUrl}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {item.brad}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {item.title}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
         <Link to={`/item/${item.id}`}>
-        <Button size="small" color="primary">
-       Comprar
-      </Button>
+          <Button size="small" color="primary">
+            Comprar
+          </Button>
         </Link>
-    </CardActions>
-  </Card>
+      </CardActions>
+    </Card>
   );
 }

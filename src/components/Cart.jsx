@@ -9,7 +9,6 @@ import Container from 'react-bootstrap/Container';
 import { getFirestore, addDoc, collection } from "firebase/firestore";
 
 import { CartContext } from "../contexts/CartCotext";
-import { ItemCount } from "./ItemCount";
 
 const clearBuyer = { name: "", phone: "", email: "" };
 
@@ -47,25 +46,36 @@ export const Cart = (item) => {
     };
 
     return <Container>
-        <h2>Mi carrito</h2>
-        <Stack direction="row" spacing={2}>
-            <Button className="vaciar-carrito" onClick={clear} variant="outlined" startIcon={<DeleteIcon />}>
-                Vaciar carrito
-            </Button>
-        </Stack>
-        {items.map((item) => (
-            <div className="producto-seleccionado" key={item.id}>
-                <div>
-                    <img src={item.imgUrl} alt={item.title} width={250} />
+        <div className="carrito">
+            <h2>Mi carrito</h2>
+            <Stack direction="row" spacing={2}>
+                <Button className="vaciar-carrito" onClick={clear} variant="outlined" startIcon={<DeleteIcon />}>
+                    Vaciar carrito
+                </Button>
+            </Stack>
+        </div>
+        <div>
+            {items.map((item) => (
+                <div className="producto-seleccionado" key={item.id}>
+                    <div>
+                        <img src={item.imgUrl} alt={item.title} width={250} />
+                    </div>
+                    <div>
+                        <h5>{item.title}</h5>
+                    </div>
+                    <div>
+                        <h5>Cantidad: {item.quantity}</h5>
+                    </div>
+                    <div>
+                        <h6>$ {item.price}</h6>
+                    </div>
+                    <IconButton onClick={() => removeItem(item.id)} aria-label="delete" size="large">
+                        <DeleteIcon />
+                    </IconButton>
                 </div>
-                <h5>{item.title}</h5>
-                <h7>Cantidad: {item.quantity}</h7>
-                <p>$ {item.price}</p>
-                <IconButton aria-label="delete" size="large">
-                    <DeleteIcon onClick={() => removeItem(item.id)} />
-                </IconButton>
-            </div>
-        ))}
+            ))}
+        </div>
+
         <div className="formulario">
             <div className="form">
                 <div className="formu">
@@ -84,7 +94,7 @@ export const Cart = (item) => {
                 </div>
 
                 <div className="total">
-                    <h4>Total: ${total}</h4>
+                    <h5>Total: ${total}</h5>
                 </div>
                 <div>
                     <Button type="button" onClick={handleSendOrder}>Finalizar compra</Button>

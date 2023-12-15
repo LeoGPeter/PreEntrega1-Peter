@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea } from '@mui/material';
+import { CardActionArea } from '@mui/material';
 
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
@@ -15,56 +15,56 @@ import { CartContext } from '../contexts/CartCotext';
 import { ItemCount } from './ItemCount';
 
 export const ItemDetailsContainer = () => {
-    const [item, setItem] = useState(null)
+  const [item, setItem] = useState(null)
 
-    const {id} = useParams();
+  const { id } = useParams();
 
-    const { addItem } = useContext (CartContext);
+  const { addItem } = useContext(CartContext);
 
-    useEffect(() => {
-        const db = getFirestore();
+  useEffect(() => {
+    const db = getFirestore();
 
-        const refDoc = doc(db, "products", id );
+    const refDoc = doc(db, "products", id);
 
-        getDoc(refDoc).then((snapshot) => {
-          setItem({id: snapshot.id, ...snapshot.data()});
-        });
-    },[id]);
+    getDoc(refDoc).then((snapshot) => {
+      setItem({ id: snapshot.id, ...snapshot.data() });
+    });
+  }, [id]);
 
-    const add = (quantity) =>{
-      addItem(item, quantity)
-    }
-    
+  const add = (quantity) => {
+    addItem(item, quantity)
+  }
 
-    if (!item) {
-        return <AutorenewIcon/>;
-    }
 
-    return (
-      <Container>
+  if (!item) {
+    return <AutorenewIcon />;
+  }
+
+  return (
+    <Container>
       <Card sx={{ maxWidth: 500, margin: 3 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              image={item.imgUrl}
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {item.brand}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {item.title}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                ${item.price}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">Stock:   
-                 {item.stock}
-              </Typography>
-              <ItemCount item={item} addItem={add} />
-            </CardContent>
-          </CardActionArea>
-        </Card> 
-        </Container>
-      );
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            image={item.imgUrl}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {item.brand}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {item.title}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              ${item.price}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">Stock:
+              {item.stock}
+            </Typography>
+            <ItemCount item={item} addItem={add} />
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Container>
+  );
 }
